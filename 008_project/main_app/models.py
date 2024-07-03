@@ -44,6 +44,9 @@ class Dungeon(models.Model):
     boss_health = models.PositiveIntegerField()
     reward = models.TextField()
 
+    def __str__(self):
+        return f"{self.name} is guarded by {self.boss_name} who has {self.boss_health} health points!"
+
 
 class Workout(models.Model):
     WORKOUT_TYPE_CHOICES = (
@@ -60,3 +63,40 @@ class Workout(models.Model):
     difficulty = models.CharField(max_length=50)
     calories_burned = models.PositiveIntegerField()
     instructor = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} from {self.workout_type} type has {self.difficulty} difficulty!"
+
+
+class ArtworkGallery(models.Model):
+    artist_name = models.CharField(max_length=100)
+    art_name = models.CharField(max_length=100)
+    rating = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+class LaptopBrandChoice(models.TextChoices):
+    ASUS = "Asus", "Asus"
+    ACER = "Acer", "Acer"
+    APPLE = "Apple", "Apple"
+    LENOVO = "Lenovo", "Lenovo"
+    DELL = "Dell", "Dell"
+
+
+class OperationSystemChoices(models.TextChoices):
+    Windows = 'Windows', 'Windows'
+    MacOS = 'MacOS', 'MacOS'
+    Linux = 'Linux', 'Linux'
+    Chrome_OS = 'Chrome OS', 'Chrome OS'
+
+
+class Laptop(models.Model):
+    brand = models.CharField(max_length=20, choices=LaptopBrandChoice)
+    processor = models.CharField(max_length=100)
+    memory = models.PositiveIntegerField(help_text="Memory in GB")
+    storage = models.PositiveIntegerField(help_text="Storage in GB")
+    operation_system = models.CharField(max_length=10, choices=OperationSystemChoices)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+
