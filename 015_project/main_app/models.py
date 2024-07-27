@@ -1,6 +1,6 @@
 from django.db import models
 
-from managers import ProductManager
+from main_app.managers import ProductManager
 
 
 class Category(models.Model):
